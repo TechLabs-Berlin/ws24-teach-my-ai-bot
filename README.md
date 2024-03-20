@@ -17,3 +17,6 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 ```
+
+**4. Go to main.py and run it**
+
