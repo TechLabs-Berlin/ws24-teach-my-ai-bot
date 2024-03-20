@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Quiz</title>
+    <style>
+        /* Simple layout styles */
+        .container {
+            display: flex; /* Use flexbox for layout */
+            justify-content: start; /* Align items to the start of the container */
+            align-items: flex-start; /* Align items to the start vertically */
+        }
+        .input-section, .output-section {
+            margin-right: 20px; /* Add some space between the sections */
+        }
+        textarea {
+            width: 300px; /* Set a fixed width for the textareas */
+            height: 150px; /* Set a fixed height for the textareas */
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Quiz</h1>
+    <div class="container">
+        <div class="input-section">
+            <form action="/" method="post">
+                <textarea name="text" placeholder="Enter text here..."></textarea>
+                <br><br>
+                <button type="submit">Generate Quiz</button>
+            </form>
+        </div>
+        <div class="output-section">
+            {% if questions %}
+                <textarea readonly>
+                    {% for question in questions %}
+                        {{ question }}{% if not loop.last %}
+
+                        {% endif %}
+                    {% endfor %}
+                </textarea>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
