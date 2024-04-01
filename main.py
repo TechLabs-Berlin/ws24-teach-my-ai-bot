@@ -131,14 +131,19 @@ pipe = ExtractiveQAPipeline(reader, retriever)
 #function for running the queries
 def run_query(questions):
   answers_all = []
+  context_all = []
   for question in questions:
     if pipe:  # Use Haystack pipeline if available
       prediction = pipe.run(query=question, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 5}})
       vmi = prediction['answers'][0].answer
       answers_all.append(vmi)  # Extract answers from prediction
+      context = prediction['answers'][0].context
+      context_all.append(context)
+      output_dict = dict(zip(answers_all, context_all))
     else:  # If no Haystack pipeline, provide guidance for alternative processing
       print(f"Please provide a Haystack pipeline or implement your own question processing logic for question: {question}")
-  return answers_all
+  return output_dict
+
 
 #calling the function with question(s) argument
 questions = [] #fill with question(s)
