@@ -20,4 +20,4 @@ def home():
 
         return render_template("home.html", questions=questions)
     
-    return render_template('home.html')
+  a  return render_template('home.html')

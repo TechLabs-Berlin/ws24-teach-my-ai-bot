@@ -107,6 +107,12 @@ def evaluate_answer(context, question, ref_answer, student_answer):
         evaluation_result["evaluation"] = "correct"
         evaluation_result["feedback"] = "Your answer is exactly correct."
         return evaluation_result
+    # Compute embeddings for the reference and student answers
+    ref_embedding = semantic_model.encode(ref_answer)
+    student_embedding = semantic_model.encode(student_answer)
+
+    # Calculate cosine similarity between embeddings
+    similarity = util.pytorch_cos_sim(ref_embedding, student_embedding)[0][0].item()
 
     # Apply thresholds for semantic similarity
     if similarity > 0.8:
