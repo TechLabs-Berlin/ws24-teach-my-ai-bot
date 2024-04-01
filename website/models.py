@@ -3,16 +3,22 @@ import nltk
 import os
 from transformers import T5Tokenizer, pipeline, AutoTokenizer
 from sentence_transformers import SentenceTransformer, util
+import PyPDF2
+import fitz
+import nltk
+from collections import Counter
+from nltk.corpus import stopwords
+import string
 
-tokenizer = T5Tokenizer.from_pretrained("t5-base")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-current_dir = os.path.dirname(__file__)
-model_path_a = os.path.join(current_dir, "..", "models", "adult_tuned2e.pth")
-model_path_b = os.path.join(current_dir, "..", "models", "base4epoch.pth")
-
-model_a = torch.load(model_path_a, map_location=torch.device("cpu"))
-model_q = torch.load(model_path_b, map_location=torch.device("cpu"))
+# tokenizer = T5Tokenizer.from_pretrained("t5-base")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#
+# current_dir = os.path.dirname(__file__)
+# model_path_a = os.path.join(current_dir, "..", "models", "adult_tuned2e.pth")
+# model_path_b = os.path.join(current_dir, "..", "models", "base4epoch.pth")
+#
+# model_a = torch.load(model_path_a, map_location=torch.device("cpu"))
+# model_q = torch.load(model_path_b, map_location=torch.device("cpu"))
 
 
 ######   SEGMENT THE INPUT TEXT    ######
@@ -185,3 +191,23 @@ def generate_user_feedback(evaluation_result, context):
     final_feedback = f"{evaluation_result['feedback']}{separator}{summarized_context}"
 
     return final_feedback
+
+
+
+######   PDF HANDLING   ######
+
+def extract_text(file_path):
+    # Using PyMuPDF to extract text
+    text = ""
+    with fitz.open(file_path) as pdf_file:
+        for page_num in range(len(pdf_file)):
+            page = pdf_file.load_page(page_num)
+            text += page.get_text()
+    return text
+
+def extract_metadata(file_path):
+    # Using PyMuPDF for extracting metadata
+    with fitz.open(file_path) as pdf_file:
+        metadata = pdf_file.metadata
+        number_of_pages = len(pdf_file)
+        return metadata, number_of_pages
