@@ -124,7 +124,7 @@ indexing_pipeline.run_batch(file_paths=paths)
 retriever = BM25Retriever(document_store=document_store)
 #My model, hosted on Hugging Face (just use the username / and the model name)
 #piece of code to check if an gpu is available
-reader = FARMReader(model_name_or_path="dusarpi/roberta-squad", use_gpu=True) #gpu?
+reader = FARMReader(model_name_or_path="dusarpi/roberta-squad", use_gpu=False, context_window_size=580) #gpu? maybe to write it to an exception block
 pipe = ExtractiveQAPipeline(reader, retriever)
 
 #asking a question
@@ -147,4 +147,23 @@ def run_query(questions):
 
 #calling the function with question(s) argument
 questions = [] #fill with question(s)
-run_query(questions)
+output_dict = run_query(questions)
+
+#function to cut the text, after 450 characters, when reaching . , ! ?
+def extract_text(text):
+    if len(text) <= 450:
+        return text
+    else:
+        for i in range(450, len(text)):
+            if text[i] in ('.', '!', '?'):
+                return text[:i+1]
+        return text[:450]
+    
+def apply_extract_text_to_dict(input_dict):
+    output_dict = {}
+    for key, value in input_dict.items():
+        output_dict[key] = extract_text(value)
+    return output_dict
+
+#final calling 
+apply_extract_text_to_dict(output_dict)
