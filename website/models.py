@@ -1,7 +1,7 @@
 import torch
 import nltk
 import os
-from transformers import T5Tokenizer, pipeline, AutoTokenizer
+from transformers import T5Tokenizer, pipeline, AutoTokenizer, T5ForConditionalGeneration
 from sentence_transformers import SentenceTransformer, util
 import PyPDF2
 import fitz
@@ -9,16 +9,26 @@ import nltk
 from collections import Counter
 from nltk.corpus import stopwords
 import string
+import logging
+from haystack.document_stores import InMemoryDocumentStore
+from haystack.pipelines.standard_pipelines import TextIndexingPipeline
+from haystack.nodes import BM25Retriever
+from haystack.nodes import FARMReader
+from haystack.pipelines import ExtractiveQAPipeline
+from haystack.utils import print_answers
 
-# tokenizer = T5Tokenizer.from_pretrained("t5-base")
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#
-# current_dir = os.path.dirname(__file__)
-# model_path_a = os.path.join(current_dir, "..", "models", "adult_tuned2e.pth")
-# model_path_b = os.path.join(current_dir, "..", "models", "base4epoch.pth")
-#
-# model_a = torch.load(model_path_a, map_location=torch.device("cpu"))
-# model_q = torch.load(model_path_b, map_location=torch.device("cpu"))
+
+tokenizer = T5Tokenizer.from_pretrained("t5-base")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+current_dir = os.path.dirname(__file__)
+model_path_a = os.path.join(current_dir, "..", "models", "model_a_state_dict.pth")
+model_path_b = os.path.join(current_dir, "..", "models", "model_q_state_dict.pth")
+
+
+model_a = T5ForConditionalGeneration.from_pretrained("t5-base", state_dict=torch.load(model_path_a, map_location=device))
+model_q = T5ForConditionalGeneration.from_pretrained("t5-base", state_dict=torch.load(model_path_b, map_location=device))
+
 
 
 ######   SEGMENT THE INPUT TEXT    ######
@@ -167,11 +177,11 @@ def generate_user_feedback(evaluation_result, context):
     Returns:
     - str: Tailored user feedback based on the summarization of the context or feedback with context.
     """
-
+    sum_tokenizer = AutoTokenizer.from_pretrained("Oulaa/teachMy_sum")
     separator = "\n\n"  # Double newline for clear separation
 
     # Tokenize the context to count the tokens
-    context_tokens = tokenizer.tokenize(context)
+    context_tokens = sum_tokenizer.tokenize(context)
     num_context_tokens = len(context_tokens)
 
     # Define a threshold for when the context is considered too long in terms of tokens
@@ -211,3 +221,85 @@ def extract_metadata(file_path):
         metadata = pdf_file.metadata
         number_of_pages = len(pdf_file)
         return metadata, number_of_pages
+
+logging.basicConfig(format="%(levelname)s - %(name)s -  %(message)s", level=logging.WARNING)
+logging.getLogger("haystack").setLevel(logging.INFO)
+
+document_store = InMemoryDocumentStore(use_bm25=True)
+
+nltk.download('stopwords')
+
+def write_text_to_file(text, filename="output.txt"):
+    with open(filename, "w", encoding='utf-8') as text_file:
+        text_file.write(text)
+
+#splits the file to 9999 char lengts files
+def split_file(filename, max_chars=9999):
+  """Splits a long text file into parts with a maximum character limit and stores file paths.
+
+  Args:
+    filename: The name of the long text file to split.
+    max_chars: The maximum number of characters allowed per part (default 9999).
+
+  Returns:
+    A list containing the paths to all the created output files.
+  """
+
+  # Open the file in read mode
+  with open(filename, 'r') as f:
+    # Read the entire content of the file
+    data = f.read()
+
+  # Initialize variables
+  part_number = 1
+  current_part = ""
+  file_paths = []
+
+  # Loop through the data character by character
+  for char in data:
+    # Add character to current part
+    current_part += char
+
+    # Check if current part exceeds limit
+    if len(current_part) > max_chars:
+      # Write current part to a file
+      with open(f"output{part_number}.txt", "w") as f:
+        f.write(current_part)
+
+      # Add file path to list and reset variables
+      file_paths.append(f"output{part_number}.txt")
+      current_part = ""
+      part_number += 1
+
+  # Write the final part (if any) and add path
+  if current_part:
+    with open(f"output{part_number}.txt", "w") as f:
+      f.write(current_part)
+    file_paths.append(f"output{part_number}.txt")
+
+  print(f"The long text file has been split into parts with a maximum of {max_chars} characters each. File paths stored in file_paths list.")
+  return file_paths
+
+indexing_pipeline = TextIndexingPipeline(document_store)
+retriever = BM25Retriever(document_store=document_store)
+#My model, hosted on Hugging Face (just use the username / and the model name)
+#piece of code to check if an gpu is available
+reader = FARMReader(model_name_or_path="dusarpi/roberta-squad", use_gpu=False) #gpu?
+pipe = ExtractiveQAPipeline(reader, retriever)
+
+#asking a question
+#function for running the queries
+def run_query(questions):
+  answers_all = []
+  context_all = []
+  for question in questions:
+    if pipe:  # Use Haystack pipeline if available
+      prediction = pipe.run(query=question, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 5}})
+      vmi = prediction['answers'][0].answer
+      answers_all.append(vmi)  # Extract answers from prediction
+      context = prediction['answers'][0].context
+      context_all.append(context)
+      output_dict = dict(zip(answers_all, context_all))
+    else:  # If no Haystack pipeline, provide guidance for alternative processing
+      print(f"Please provide a Haystack pipeline or implement your own question processing logic for question: {question}")
+  return output_dict

@@ -12,9 +12,12 @@ def create_app():
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
-    # Configuration
-    UPLOAD_FOLDER = 'uploads'  # Folder where uploaded files will be stored
+
+    UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
     ALLOWED_EXTENSIONS = {'pdf'}  # Allowed file types for upload
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max upload size
+
     return app
+
+    return app
+
