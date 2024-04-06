@@ -1,0 +1,102 @@
+, intensive care, and inpatient case management scenarios.
+Further research would be needed to understand the applicability of our findings in many settings such as
+these, where the requirements for high-quality history-taking might differ [91, 92]. The OSCE framework is
+commonly used in the assessment of clinicians’ skills. It encompasses a significant range of methodologies
+including real or simulated patients, interaction with physical artefacts or clinical materials, applications to
+a variety of medical specialties, tasks or settings; and both remote or in-person assessments. Although the
+OSCE approach is popular, there are significant limitations to its validity [93]. We utilised a remote text-based
+|19
+assessment, replicating known issues with the paradigm of “virtual OSCE” such as the inability to incorporate
+non-verbal symptoms, signs and communication features. Additionally, this format could introduce unfamiliar
+constraints to the communication of PCP participants [48].
+The tone, content, and nature of the OSCE dialogues in our study are likely not to be representative of
+real-world patient populations. For example, patient actors may have described their symptoms with greater
+structure, depth or clinical detail than could be routinely expected in many consultations, or had greater
+comprehension of clinical context than would be ordinarily expected. Furthermore, although evaluation was
+blinded, the style of responses from AMIE was notably different to that by PCPs which limits the practical
+extent of blinding in study design.
+Therefore even within the distribution of diseases and specialties we addressed, our findings should be
+interpreted with humility and caution. There is a need for further research to examine varied presentations
+of the same diseases, alongside exploration of alternate approaches to evaluating history-taking and clinical
+dialogue in situations of different patient needs, preferences, behaviours and circumstances.
+Fairness and Bias. The evaluation protocol presented in this paper is limited in terms of its ability to capture
+potential issues related to fairness and bias, which remains an important open question that we will aim to
+address in subsequent system evaluations. Recent advances in the development of comprehensive frameworks
+for bias detection in large language models [94, 95] present a promising starting point for establishing such
+an approach. It should be noted that medical diagnostic dialogue is a particularly challenging use case, due
+to the complexity of the medical domain, the interactive information gathering nature of the dialogue, and
+the outcome-driven setting, with the potential of associated harms in case of incorrect diagnosis or incorrect
+medical advice. Nevertheless, disentangling these issues is an important further research area if LLMs in
+the domain are to overcome rather than propagate inequities in healthcare. For example, previous studies
+have found that physicians approach communication with their patients differently, on average, depending
+on patients’ race, resulting in Black patients receiving communication that was less patient-centered, and
+with a lower positive affect [96]. Other studies have found differences in physicians’ communication styles and
+conversation length based on gender [97]. Effective intercultural communication skills are essential [91]. There
+is therefore a non-negligible risk that such historical conversational biases may be replicated or amplified
+in an AI dialogue system, but at the same time there is also an opportunity to work towards designing
+conversational systems that can be more inclusive, and more personalized to the individual patient’s needs.
+To help inform the development of the necessary fairness, bias, and equity frameworks, it is important to
+employ a participatory approach to solicit representative views across a wide range of patient demographics,
+as well as clinical and health equity domain experts. Such evaluation frameworks should be complemented
+by extensive model red teaming and an adversarial approach to identifying any remaining gaps and failure
+modes. Recent advances in red teaming LLMs could be useful in this scenario [98–101]. These practices should
+not only inform the evaluation of the final model, but also its development and iterative refinement. Model
+development should follow the established data and model reporting practices and provide transparency into
+the training data and the associated decision processes [102–104]. The dialogue research dataset contributing
+to AMIE training data in our study was de-identified, reducing the availability of socio-economic factors,
+patient demographics, and information about clinical settings and locations.
+Further work is also needed to ensure the robustness of medical LLMs in multilingual settings [105–108],
+and particularly their performance in low-resource languages [109]. The great variety of cultures [110],
+languages, localities, identities, and localized medical needs, makes the task of generating a priori static
+yet comprehensive fairness benchmarks practically infeasible. Measurement and mitigation of bias must
+move beyond the traditional narrow focus on specific axes that fails to scale globally [111]. LLM-based
+evaluators present a potential solution for preliminary assessments in languages where there are no systematic
+benchmarks, though prior studies have found these auto-evaluation frameworks to be biased, underscoring the
+need for calibrating them on native speaker evaluations, and using them with caution [112].
+Deployment. This research demonstrates the potential of LLMs for future use in healthcare in the context
+of diagnostic dialogue. Transitioning from an LLM research prototype that has been evaluated in this study
+to a safe and robust tool that can be used by healthcare providers, administrators, and people will require
+significant additional research to ensure the safety, reliability, efficacy, and privacy of the technology. Careful
+|20
+consideration will need to be given to the ethical deployment of this technology including rigorous quality
+assessment across different clinical settings and research into reliable uncertainty estimation methods [113–116]
+that would allow for deferral to human clinical experts when needed. These and other guardrails are needed
+to mitigate potential overreliance on LLM technologies, with other specific measures for attention to ethical
+and regulatory requirements particular to future use-cases and the presence of qualified physicians in the loop
+to safeguard any model outputs. Additional research will also be needed to assess the extent to which biases
+and security vulnerabilities might arise either from base models or the circumstances of use in deployment, as
+we have highlighted in our prior work [12]. Given the continuous evolution of clinical knowledge, it will also
+be important to develop ways for LLMs to utilize up-to-date clinical information [117].
+7 Conclusion
+The utility of medical AI systems could be greatly improved if they are better able to interact conversationally,
+anchoring on large-scale medical knowledge while communicating with appropriate levels of empathy and
+trust. This research demonstrates the significant potential capabilities of LLM based AI systems for settings
+involving clinical history-taking and diagnostic dialogue. The performance of AMIE in simulated consultations
+represents a milestone for the field, as it was assessed along an evaluation framework that considered multiple
+clinically-relevant axes for conversational diagnostic medical AI. However, the results should be interpreted
+with appropriate caution. Translating from this limited scope of experimental simulated history-taking
+and diagnostic dialogue, towards real-world tools for people and those who provide care for them, requires
+significant additional research and development to ensure the safety, reliability, fairness, efficacy, and privacy
+of the technology. If successful, we believe AI systems such as AMIE can be at the core of next generation
+learning health systems that help scale world class healthcare to everyone.
+Acknowledgments
+This project was an extensive collaboration between many teams at Google Research and Google DeepMind.
+We thank Yun Liu, Daniel McDuff, Jake Sunshine, Ali Connell, Paul McGovern and Zoubin Ghahramani for
+their comprehensive review and detailed feedback on the manuscript. We also thank Sami Lachgar, Lauren
+Winer, John Guilyard and Maggie Shiels for contributions to the narratives and visuals. We are grateful
+to Julie Anne Seguin, Sally Goldman, Yuri Vasilevski, Xinying Song, Akshay Goel, Chu-ling Ko, Abhinav
+Das, Haiyang Yu, Chang Liu, Yuchen Liu, SiWai Man, Brett Hatfield, Sean Li, Ajay Joshi, Gordon Turner,
+Annisah Um’rani, Divya Pandya and Preeti Singh for their valuable insights, technical support and feedback
+during our research. We also thank our clinical provider partners in Canada and India for their partnership in
+conducting the OSCE study. Finally, we are grateful to Dale Webster, Ewa Dominowska, David Fleet, Philip
+Mansfield, Sushant Prakash, Renee Wong, Susan Thomas, Michael Howell, Karen DeSalvo, Jeff Dean, James
+Manyika, Zoubin Ghahramani and Demis Hassabis for their support during the course of this project.
+Data Availability
+Some of the real-world datasets used in the development of AMIE are open-source (MedQA). The scenario
+packs from UK used in the OSCE study are also available for download on the internet.
+Code Availability
+AMIE is an LLM based research AI system for diagnostic dialogue. We are not open-sourcing model code and
+weights due to the safety implications of unmonitored use of such a system in medical settings. In the interest
+of responsible innovation, we will be working with research partners, regulators, and providers to validate and
+explore safe onward uses of AMIE. For reproducibility, we have documented technical deep learning methods
+while keep

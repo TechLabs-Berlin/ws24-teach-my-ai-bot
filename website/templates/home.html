@@ -37,25 +37,5 @@
             <input type="submit" value="Start Quiz">
         </form>
     {% endif %}
-    <!-- Quiz Question and Feedback (if in quiz phase) -->
-    {% if in_quiz_phase %}
-        {% if question %}
-            <h2>Quiz Question:</h2>
-            <p>{{ question }}</p>
-            <form action="{{ url_for('views.generate_quiz') }}" method="post">
-                <input type="text" name="user_answer" placeholder="Enter your answer here...">
-                <button type="submit">Submit Answer</button>
-            </form>
-        {% endif %}
-        {% if feedback %}
-            <div>
-                <h3>Feedback:</h3>
-                <p>{{ feedback }}</p>
-                <form action="{{ url_for('views.generate_quiz') }}" method="post">
-                    <button name="next" type="submit">Next Question</button>
-                </form>
-            </div>
-        {% endif %}
-    {% endif %}
 </body>
 </html>

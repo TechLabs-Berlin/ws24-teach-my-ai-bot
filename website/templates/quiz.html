@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>Quiz Time!</h1>
+    {% if question %}
+        <form action="{{ url_for('views.generate_quiz') }}" method="post">
+            <p>{{ question }}</p>
+            <input type="text" name="user_answer" placeholder="Your answer">
+            <button type="submit">Submit</button>
+        </form>
+    {% endif %}
+    {% if feedback %}
+        <div>
+            <h3>Your Feedback:</h3>
+            <p>{{ feedback }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>

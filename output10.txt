@@ -1,0 +1,157 @@
+Slama, K., Ray, A.,
+et al. Training language models to follow instructions with human feedback. arXiv preprint arXiv:2203.02155 (2022).
+54.
+Zhao, J., Khashabi, D., Khot, T., Sabharwal, A. & Chang, K.-W. Ethical-advice taker: Do language models understand
+natural language interventions? arXiv preprint arXiv:2106.01465 (2021).
+55.
+Saunders, W., Yeh, C., Wu, J., Bills, S., Ouyang, L., Ward, J. & Leike, J. Self-critiquing models for assisting human
+evaluators. arXiv preprint arXiv:2206.05802 (2022).
+56.
+Scheurer, J., Campos, J. A., Korbak, T., Chan, J. S., Chen, A., Cho, K. & Perez, E. Training language models with
+language feedback at scale. arXiv preprint arXiv:2303.16755 (2023).
+57.
+Glaese, A., McAleese, N., Trębacz, M., Aslanides, J., Firoiu, V., Ewalds, T., Rauh, M., Weidinger, L., Chadwick, M.,
+Thacker, P., et al. Improving alignment of dialogue agents via targeted human judgements. arXiv preprint arXiv:2209.14375
+(2022).
+58.
+Bai, Y., Kadavath, S., Kundu, S., Askell, A., Kernion, J., Jones, A., Chen, A., Goldie, A., Mirhoseini, A., McKinnon, C.,
+et al. Constitutional AI: Harmlessness from AI feedback. arXiv preprint arXiv:2212.08073 (2022).
+59.
+Askell, A., Bai, Y., Chen, A., Drain, D., Ganguli, D., Henighan, T., Jones, A., Joseph, N., Mann, B., DasSarma, N., et al.
+A general language assistant as a laboratory for alignment. arXiv preprint arXiv:2112.00861 (2021).
+60.
+Shor, J., Bi, R. A., Venugopalan, S., Ibara, S., Goldenberg, R. & Rivlen, E. Clinical BERTScore: An Improved Measure of
+Automatic Speech Recognition Performance in Clinical Settings. arXiv preprint arXiv:2303.05737 (2023).
+61.
+Abacha, A. B., Agichtein, E., Pinter, Y. & Demner-Fushman, D. Overview of the medical question answering task at
+TREC 2017 LiveQA. in TREC (2017), 1–12.
+62.
+Wallace, W., Chan, C., Chidambaram, S., Hanna, L., Iqbal, F. M., Acharya, A., Normahani, P., Ashrafian, H., Markar,
+S. R., Sounderajah, V., et al. The diagnostic and triage accuracy of digital and online symptom checker tools: a systematic
+review. NPJ Digital Medicine 5, 118 (2022).
+63.
+Zeltzer, D., Herzog, L., Pickman, Y., Steuerman, Y., Ber, R. I., Kugler, Z., Shaul, R. & Ebbert, J. O. Diagnostic accuracy
+of artificial intelligence in virtual primary care. Mayo Clinic Proceedings: Digital Health 1, 480–489 (2023).
+64.
+Johri, S., Jeong, J., Tran, B. A., Schlessinger, D. I., Wongvibulsin, S., Cai, Z. R., Daneshjou, R. & Rajpurkar, P. Testing
+the Limits of Language Models: A Conversational Framework for Medical AI Assessment. medRxiv, 2023–09 (2023).
+65.
+Zeng, G., Yang, W., Ju, Z., Yang, Y., Wang, S., Zhang, R., Zhou, M., Zeng, J., Dong, X., Zhang, R., et al. MedDialog:
+Large-scale medical dialogue datasets in Proceedings of the 2020 Conference on Empirical Methods in Natural Language
+Processing (EMNLP) (2020), 9241–9250.
+66.
+Liu, W., Tang, J., Cheng, Y., Li, W., Zheng, Y. & Liang, X. MedDG: an entity-centric medical consultation dataset for
+entity-aware medical dialogue generation in CCF International Conference on Natural Language Processing and Chinese
+Computing (2022), 447–459.
+67.
+Varshney, D., Zafar, A., Behra, N. K. & Ekbal, A. Cdialog: A multi-turn COVID-19 conversation dataset for entity-aware
+dialog generation. arXiv preprint arXiv:2212.06049 (2022).
+68.
+Yan, G., Pei, J., Ren, P., Ren, Z., Xin, X., Liang, H., de Rijke, M. & Chen, Z. ReMeDi: Resources for Multi-domain,
+Multi-service, Medical Dialogues in Proceedings of the 45th International ACM SIGIR Conference on Research and
+Development in Information Retrieval (2022), 3013–3024.
+69.
+Kelly, C. J., Karthikesalingam, A., Suleyman, M., Corrado, G. & King, D. Key challenges for delivering clinical impact
+with artificial intelligence. BMC medicine 17, 1–9 (2019).
+|23
+70.
+McDuff, D., Schaekermann, M., Tu, T., Palepu, A., Wang, A., Garrison, J., Singhal, K., Sharma, Y., Azizi, S., Kulkarni, K.,
+et al. Towards Accurate Differential Diagnosis with Large Language Models. arXiv preprint arXiv:2312.00164 (2023).
+71.
+Kanjee, Z., Crowe, B. & Rodman, A. Accuracy of a Generative Artificial Intelligence Model in a Complex Diagnostic
+Challenge. JAMA (2023).
+72.
+Semigran, H. L., Linder, J. A., Gidengil, C. & Mehrotra, A. Evaluation of symptom checkers for self diagnosis and triage:
+audit study. BMJ 351 (2015).
+73.
+Ayers, J. W., Poliak, A., Dredze, M., Leas, E. C., Zhu, Z., Kelley, J. B., Faix, D. J., Goodman, A. M., Longhurst, C. A.,
+Hogarth, M., et al. Comparing Physician and Artificial Intelligence Chatbot Responses to Patient Questions Posted to a
+Public Social Media Forum. JAMA Internal Medicine (2023).
+74.
+OpenAI. ChatGPT OpenAI. https://chat.openai.com/chat.
+75.
+Carrillo de Albornoz, S., Sia, K.-L. & Harris, A. The effectiveness of teleconsultations in primary care: systematic review.
+Family Practice 39, 168–182 (2022).
+76.
+Wharton, G. A., Sood, H. S., Sissons, A. & Mossialos, E. Virtual primary care: fragmentation or integration? The Lancet
+Digital Health 1, e330–e331 (2019).
+77.
+Fuster-Casanovas, A. & Vidal-Alaball, J. Asynchronous Remote Communication as a Tool for Care Management in
+Primary Care: A Rapid Review of the Literature. International Journal of Integrated Care 22 (2022).
+78.
+Hammersley, V., Donaghy, E., Parker, R., McNeilly, H., Atherton, H., Bikker, A., Campbell, J. & McKinstry, B. Comparing
+the content and quality of video, telephone, and face-to-face consultations: a non-randomised, quasi-experimental,
+exploratory study in UK primary care. British Journal of General Practice 69, e595–e604 (2019).
+79.
+Gross, D. A., Zyzanski, S. J., Borawski, E. A., Cebul, R. D. & Stange, K. C. Patient satisfaction with time spent with
+their physician. Journal of Family Practice 47, 133–138 (1998).
+80.
+Tates, K., Antheunis, M. L., Kanters, S., Nieboer, T. E. & Gerritse, M. B. The effect of screen-to-screen versus face-to-face
+consultation on doctor-patient communication: an experimental study with simulated patients. Journal of medical Internet
+research 19, e421 (2017).
+81.
+Zyzanski, S. J., Stange, K. C., Langa, D. M. & Flocke, S. A. Trade-offs in high-volume primary care practice. Journal of
+Family Practice 46, 397–402 (1998).
+82.
+Dvijotham, K., Winkens, J., Barsbey, M., Ghaisas, S., Stanforth, R., Pawlowski, N., Strachan, P., Ahmed, Z., Azizi, S.,
+Bachrach, Y., et al. Enhancing the reliability and accuracy of AI-enabled diagnosis via complementarity-driven deferral to
+clinicians. Nature Medicine 29, 1814–1820 (2023).
+83.
+Bird, J. & Cohen-Cole, S. A. in Methods in teaching consultation-liaison psychiatry 65–88 (Karger Publishers, 1990).
+84.
+Rezler, A. G., Woolliscroft, J. A. & Kalishman, S. G. What is missing from patient histories? Medical Teacher 13, 245–252
+(1991).
+85.
+Rosenberg, E. E. Lessons for Clinicians From Physician-Patient. Arch Fam Med 6, 279–283 (1997).
+86.
+Smith, R. C. Patient-centered interviewing: an evidence-based method (Lippincott Williams & Wilkins, 2002).
+87.
+Berwick, D. M., Nolan, T. W. & Whittington, J. The triple aim: care, health, and cost. Health affairs 27, 759–769 (2008).
+88.
+Bodenheimer, T. & Sinsky, C. From triple to quadruple aim: care of the patient requires care of the provider. The Annals
+of Family Medicine 12, 573–576 (2014).
+89.
+Adamson, T. E., Tschann, J. M., Gullion, D. & Oppenberg, A. Physician communication skills and malpractice claims. A
+complex relationship. Western Journal of Medicine 150, 356 (1989).
+90.
+Silverman, J. & Kinnersley, P. Doctors’ non-verbal behaviour in consultations: look at the patient before you look at the
+computer 2010.
+91.
+Rahman, U. & Cooling, N. Inter-Cultural Communication Skills Training in Medical Schools: A Systematic Review.
+Medical Research Archives 11 (2023).
+92.
+Kantar, A., Marchant, J. M., Song, W.-J., Shields, M. D., Chatziparasidis, G., Zacharasiewicz, A., Moeller, A. & Chang,
+A. B. History taking as a diagnostic tool in children with chronic cough. Frontiers in pediatrics 10, 850912 (2022).
+93.
+Setyonugroho, W., Kennedy, K. M. & Kropmans, T. J. Reliability and validity of OSCE checklists used to assess the
+communication skills of undergraduate medical students: a systematic review. Patient education and counseling 98,
+1482–1491 (2015).
+94.
+Weidinger, L., Uesato, J., Rauh, M., Griffin, C., Huang, P.-S., Mellor, J., Glaese, A., Cheng, M., Balle, B., Kasirzadeh, A.,
+et al. Taxonomy of risks posed by language models in Proceedings of the 2022 ACM Conference on Fairness, Accountability,
+and Transparency (2022), 214–229.
+95.
+Gallegos, I. O., Rossi, R. A., Barrow, J., Tanjim, M. M., Kim, S., Dernoncourt, F., Yu, T., Zhang, R. & Ahmed, N. K.
+Bias and Fairness in Large Language Models: A Survey 2023. arXiv: 2309.00770 [cs.CL].
+96.
+Johnson, R. L., Roter, D., Powe, N. R. & Cooper, L. A. Patient race/ethnicity and quality of patient–physician
+communication during medical visits. American journal of public health 94, 2084–2090 (2004).
+97.
+Roter, D. L., Hall, J. A. & Aoki, Y. Physician gender effects in medical communication: a meta-analytic review. Jama
+288, 756–764 (2002).
+98.
+Perez, E., Huang, S., Song, F., Cai, T., Ring, R., Aslanides, J., Glaese, A., McAleese, N. & Irving, G. Red teaming
+language models with language models. arXiv preprint arXiv:2202.03286 (2022).
+99.
+Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S., Mann, B., Perez, E., Schiefer, N., Ndousse, K.,
+et al. Red teaming language models to reduce harms: Methods, scaling behaviors, and lessons learned. arXiv preprint
+arXiv:2209.07858 (2022).
+100.
+Yu, J., Lin, X. & Xing, X. Gptfuzzer: Red teaming large language models with auto-generated jailbreak prompts. arXiv
+preprint arXiv:2309.10253 (2023).
+101.
+Ge, S., Zhou, C., Hou, R., Khabsa, M., Wang, Y.-C., Wang, Q., Han, J. & Mao, Y. MART: Improving LLM Safety with
+Multi-round Automatic Red-Teaming. arXiv preprint arXiv:2311.07689 (2023).
+102.
+Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D. & Gebru, T. Model
+cards for model reporting in Proceedings of the conference on 

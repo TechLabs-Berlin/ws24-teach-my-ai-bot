@@ -1,0 +1,264 @@
+fairness, accountability, and transparency (2019), 220–229.
+103.
+Crisan, A., Drouhard, M., Vig, J. & Rajani, N. Interactive model cards: A human-centered approach to model documentation
+in Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (2022), 427–439.
+|24
+104.
+Pushkarna, M., Zaldivar, A. & Kjartansson, O. Data cards: Purposeful and transparent dataset documentation for
+responsible ai in Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency (2022), 1776–
+1826.
+105.
+Choudhury, M. & Deshpande, A. How Linguistically Fair Are Multilingual Pre-Trained Language Models? in Proceedings
+of the AAAI conference on artificial intelligence 35 (2021), 12710–12718.
+106.
+Talat, Z., Névéol, A., Biderman, S., Clinciu, M., Dey, M., Longpre, S., Luccioni, S., Masoud, M., Mitchell, M., Radev, D.,
+et al. You reap what you sow: On the challenges of bias evaluation under multilingual settings in Proceedings of BigScience
+Episode# 5–Workshop on Challenges & Perspectives in Creating Large Language Models (2022), 26–41.
+107.
+Ahuja, S., Aggarwal, D., Gumma, V., Watts, I., Sathe, A., Ochieng, M., Hada, R., Jain, P., Axmed, M., Bali, K. &
+Sitaram, S. MEGAVERSE: Benchmarking Large Language Models Across Languages, Modalities, Models and Tasks 2023.
+arXiv: 2311.07463 [cs.CL].
+108.
+ImaniGooghari, A., Lin, P., Kargaran, A. H., Severini, S., Jalili Sabet, M., Kassner, N., Ma, C., Schmid, H., Martins, A.,
+Yvon, F. & Schütze, H. Glot500: Scaling Multilingual Corpora and Language Models to 500 Languages in Proceedings of
+the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (Association for
+Computational Linguistics, 2023). http://dx.doi.org/10.18653/v1/2023.acl-long.61.
+109.
+Nguyen, X.-P., Aljunied, S. M., Joty, S. & Bing, L. Democratizing LLMs for Low-Resource Languages by Leveraging their
+English Dominant Abilities with Linguistically-Diverse Prompts 2023. arXiv: 2306.11372 [cs.CL].
+110.
+Naous, T., Ryan, M. J., Ritter, A. & Xu, W. Having Beer after Prayer? Measuring Cultural Bias in Large Language
+Models 2023. arXiv: 2305.14456 [cs.CL].
+111.
+Ramesh, K., Sitaram, S. & Choudhury, M. Fairness in Language Models Beyond English: Gaps and Challenges 2023.
+arXiv: 2302.12578 [cs.CL].
+112.
+Hada, R., Gumma, V., de Wynter, A., Diddee, H., Ahmed, M., Choudhury, M., Bali, K. & Sitaram, S. Are Large Language
+Model-based Evaluators the Solution to Scaling Up Multilingual Evaluation? 2023. arXiv: 2309.07462 [cs.CL].
+113.
+Quach, V., Fisch, A., Schuster, T., Yala, A., Sohn, J. H., Jaakkola, T. S. & Barzilay, R. Conformal Language Modeling
+2023. arXiv: 2306.10193 [cs.CL].
+114.
+Chen, J. & Mueller, J. Quantifying Uncertainty in Answers from any Language Model and Enhancing their Trustworthiness
+2023. arXiv: 2308.16175 [cs.CL].
+115.
+Huang, Y., Song, J., Wang, Z., Zhao, S., Chen, H., Juefei-Xu, F. & Ma, L. Look Before You Leap: An Exploratory Study
+of Uncertainty Measurement for Large Language Models 2023. arXiv: 2307.10236 [cs.SE].
+116.
+Yang, Q., Ravikumar, S., Schmitt-Ulms, F., Lolla, S., Demir, E., Elistratov, I., Lavaee, A., Lolla, S., Ahmadi, E., Rus, D.,
+Amini, A. & Perez, A. Uncertainty-aware Language Modeling for Selective Question Answering 2023. arXiv: 2311.15451
+[cs.CL].
+117.
+Lazaridou, A., Kuncoro, A., Gribovskaya, E., Agrawal, D., Liska, A., Terzi, T., Gimenez, M., de Masson d’Autume, C.,
+Kocisky, T., Ruder, S., et al. Mind the gap: Assessing temporal generalization in neural language models. Advances in
+Neural Information Processing Systems 34, 29348–29363 (2021).
+|25
+Appendix
+In the following sections, we report additional data and detailed analyses to further illustrate the performance
+of AMIE.
+We provide details on:
+• OSCE evaluation rubrics
+• Example of simulated dialogues after self-critique
+• AMIE user interfaces
+• Example consultation with OSCE agents
+• DDx top-k accuracy by degree of matching
+• DDx top-k accuracy by specialty
+• Auto-evaluation on DDx
+– Reproducing DDx accuracy via auto-evaluation
+– AMIE DDx accuracy on AMIE and PCP consultations
+– DDx accuracy as a function of the number of dialogue turns
+• DDx top-k accuracy by location
+• Model-based auto-evaluation of qualitative criteria:
+– Rank-order agreement of auto-evaluation to specialists
+– Auto-evaluation of simulated dialogues with self-play
+A.1 OSCE Evaluation Rubrics
+General Medical Council Patient Questionnaire (GMCPQ)
+Question
+Scale
+Options
+Criteria
+Assessed by
+How would you rate 
+your doctor today at 
+each of the following?
+5-point scale 
+for each of 
+the criteria
+Poor
+Less than Satisfactory
+Satisfactory
+Good
+Very Good
+Cannot rate / Does not apply
+- Being polite
+- Making you feel at ease
+- Listening to you
+- Assessing your medical condition
+- Explaining your condition and treatment
+- Involving you in decisions about your treatment
+- Providing or arranging treatment for you
+Patient Actor
+How much do you 
+agree with the 
+following statements?
+5-point scale 
+for each of 
+the criteria
+Strongly disagree
+Disagree
+Neutral
+Agree
+Strongly agree
+Cannot rate / Does not apply
+- This doctor will keep information about me confidential.
+- This doctor is honest and trustworthy.
+Patient Actor
+I am confident about 
+this doctor's ability to 
+provide care.
+Binary scale
+Yes
+No
+Cannot rate / Does not apply
+Patient Actor
+I would be completely 
+happy to see this 
+doctor again.
+Binary scale
+Yes
+No
+Cannot rate / Does not apply
+Patient Actor
+Table A.1 | General Medical Council Patient Questionnaire (GMCPQ) rubric details.
+|26
+Practical Assessment of Clinical Examination Skills (PACES)
+Question
+Scale
+Options
+Assessed by
+Clinical Communication Skills
+To what extent did the doctor 
+elicit the PRESENTING 
+COMPLAINT?
+5-point scale
+1 - Appears unsystematic, unpractised, and unprofessional
+5 - Elicits presenting complaint in a thorough, systematic, fluent and professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+elicit the SYSTEMS REVIEW?
+5-point scale
+1 - Appears unsystematic, unpractised, and unprofessional
+5 - Elicits systems review in a thorough, systematic, fluent and professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+elicit the PAST MEDICAL 
+HISTORY?
+5-point scale
+1 - Appears unsystematic, unpractised, and unprofessional
+5 - Elicits past medical history in a thorough, systematic, fluent and professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+elicit the FAMILY HISTORY?
+5-point scale
+1 - Appears unsystematic, unpractised, and unprofessional
+5 - Elicits family history in a thorough, systematic, fluent and professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+elicit the MEDICATION HISTORY?
+5-point scale
+1 - Appears unsystematic, unpractised, and unprofessional
+5 - Elicits medication history in a thorough, systematic, fluent and professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+explain relevant clinical 
+information ACCURATELY?
+5-point scale
+1 - Gives inaccurate information
+5 - Explains relevant clinical information in a accurate manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+explain relevant clinical 
+information CLEARLY?
+5-point scale
+1 - Uses jargon
+5 - Explains relevant clinical information in a clear manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+explain relevant clinical 
+information WITH STRUCTURE?
+5-point scale
+1 - Explains relevant clinical information in a poorly structured manner
+5 - Explains relevant clinical information in a structured manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+explain relevant clinical 
+information COMPREHENSIVELY? 
+5-point scale
+1 - Omits important information
+5 - Explains relevant clinical information in a comprehensive manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+To what extent did the doctor 
+explain relevant clinical 
+information PROFESSIONALLY?
+5-point scale
+1 - Explains relevant clinical information in an unprofessional manner
+5 - Explains relevant clinical information in a professional manner
+Cannot rate / Does not apply / Doctor did not perform this
+Specialist
+Differential Diagnosis
+To what extent did the doctor 
+construct a sensible 
+DIFFERENTIAL DIAGNOSIS?
+5-point scale
+1 - Poor differential diagnosis AND fails to consider the correct diagnosis
+5 - Constructs a sensible differential diagnosis, including the correct diagnosis
+Specialist
+Clinical Judgement
+To what extent did the doctor 
+select a comprehensive, sensible 
+and appropriate MANAGEMENT 
+PLAN?
+5-point scale
+1 - Unfamiliar with correct management plan AND selects inappropriate management
+5 - Selects a comprehensive, sensible and appropriate management plan
+Specialist
+Managing Patient Concerns
+To what extent did the doctor 
+seek, detect, acknowledge and 
+attempt to address the patient's 
+concerns?
+5-point scale
+1 - Overlooks patient's concerns
+5 - Seeks, detects, acknowledges and attempts to address patient's concerns
+Specialist & 
+Patient Actor
+To what extent did the doctor 
+confirm the patient's knowledge 
+and understanding?
+5-point scale
+1 - Does not check knowledge and understanding
+5 - Confirms patient's knowledge and understanding
+Specialist & 
+Patient Actor
+How empathic was the doctor?
+5-point scale
+1 - Not at all empathic
+5 - Extremely empathic
+Specialist & 
+Patient Actor
+Maintaining Patient Welfare
+To what extent did the doctor 
+maintain the patient's welfare?
+5-point scale
+1 - Causes patient physical or emotional discomfort AND jeopardises patient safety
+5 - Treats patient respectfully and sensitively and ensures comfort, safety and dignity
+S
