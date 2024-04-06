@@ -16,6 +16,8 @@ def create_app():
     UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
     ALLOWED_EXTENSIONS = {'pdf'}  # Allowed file types for upload
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config.SESSION_COOKIE_SAMESITE = 'None'
+    app.config.SESSION_COOKIE_SECURE = 'True'
 
     return app
 

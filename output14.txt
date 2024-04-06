@@ -1,0 +1,226 @@
+ure. 
+Currently, I'm not on any prescribed medications
+AMIE:
+45 is relatively young for heart problems, which is reassuring. However, your 
+symptoms, especially the pressure-like pain and radiation to your arm, ARE 
+concerning for a few possibilities. To help me narrow it down further:
+Family history: Is there any heart disease, like heart attacks or angina, in your 
+close relatives?
+Lifestyle: Do you currently smoke or drink alcohol?
+Patient Actor:
+In my family history, my father had high blood pressure, and I believe he had 
+a heart attack in his mid-fifties. my mother tends to get chest infections 
+occasionally. Regarding lifestyle, I do smoke about 10 cigarettes per day, and 
+I have been doing so since the age of 25. However, I drink alcohol 
+infrequently, mainly on special occasions.
+AMIE:
+Thank you for providing that detailed information, it's very helpful. Given your 
+family history of heart problems, especially your father's heart attack, and your 
+smoking habit, we can't ignore the possibility that this is heart-related. 
+However, the fact that your pain has resolved on its own makes a typical heart 
+attack less likely.
+It's possible this is angina, which is chest pain caused by reduced blood flow to 
+the heart. It can feel similar to a heart attack, but is usually less severe and goes 
+away with rest. Another possibility is GERD, which is heartburn caused by 
+stomach acid refluxing into the esophagus. This can also cause chest pain, but 
+it's usually accompanied by a burning sensation.
+To be sure what's causing your symptoms, I strongly recommend you seek 
+immediate in-person evaluation . This will likely involve an electrocardiogram 
+(ECG) to check your heart's electrical activity, and blood tests to look for signs 
+of heart damage or other issues. Depending on the initial findings, further tests 
+may be needed.
+I understand this is worrying, but it's crucial to act fast even if it turns out NOT 
+to be a heart attack. These symptoms are significant and need prompt 
+attention to rule out serious causes and get you the right treatment.
+Patient Actor:
+I appreciate your thorough explanation, and I understand the urgency of the 
+situation. Given the potential seriousness of the symptoms, I will seek 
+immediate in-person evaluation as you've advised. The possibility of angina or 
+GERD is certainly concerning, and I want to ensure that I receive the necessary 
+tests and examinations to determine the cause and appropriate treatment. 
+Thank you for your guidance, and I'll proceed to the clinic promptly to address 
+this issue
+AMIE:
+I'm glad to hear you're taking this seriously, as prompt action is key here. At the 
+clinic, be sure to relay ALL the details we discussed, including family history, for 
+a full risk assessment. This will help them determine the best next steps, which 
+may be immediate treatment or referral to a cardiologist for specialized care.
+Patient Actor:
+Thank you again for your assistance and advice
+AMIE:
+You're very welcome. My goal is to help you get the best care possible, so don't 
+hesitate to reach out if further questions arise after your in-person evaluation. 
+Take care, and I hope you get answers and relief soon.
+Patricia Wilson (45 yr) - 
+Chest Pain
+Probable diagnosis: Angina or 
+non-ST-elevation myocardial infarction
+Plausible alternative diagnoses: Biliary 
+disease, Dyspepsia
+AMIE’s Top 10 DDx:
+1.
+Unstable Angina
+2.
+Acute Myocardial Infarction
+3.
+Stable Angina
+4.
+Gastroesophageal Reflux Disease (GERD)
+5.
+Atypical Chest Pain
+6.
+Costochondritis
+7.
+Peptic Ulcer Disease
+8.
+Gallbladder Disease (biliary colic)
+9.
+Panic Attack/Anxiety
+10.
+Pulmonary Embolism
+Figure A.5 | AMIE example consultation. Example of a patient actor’s conversation with AMIE during the OSCE study.
+|33
+A.4.2 Example PCP Consultation
+Primary Care Physician:
+Do you know what type of Vitamin? Also, please confirm that you do not have 
+any hyigh blood pressure, diabetes, high cholesterol, smoking history, or family 
+history of heart attacks.
+Patient Actor:
+I take a vitamin preparation that I purchase from the chemist, but I don't have 
+the specific details about its composition. As for my health history, I don't have 
+high blood pressure, diabetes, or high cholesterol. However, I do have a 
+smoking history of about 10 cigarettes per day since the age of 25. In terms of 
+family history, my father had high blood pressure and had a heart attack in his 
+mid-fifties. I have two older brothers, and I recently found out that one of them 
+has high cholesterol.
+Primary Care Physician:
+Can you describe the quality of the pain? Was there anything that made it 
+better or worse? For example, sometimes pain is aggravated by exertion - 
+walking at a fast pace/relieved by rest. Sometimes chest pain is made worse by 
+taking a deep inspiration. do either of these apply? Anything else you can think 
+of?
+Patient Actor:
+I wouldn't say the pain was aggravated by taking a deep breath, but walking 
+seemed to worsen it. Resting or sitting down provided some relief. It wasn't a 
+sharp or stabbing pain, more like a continuous pressure.
+Primary Care Physician:
+Did you have any palpitations? Did you feel as though you might faint? Any 
+other symptoms?
+Patient Actor:
+No, I didn't experience palpitations during the episode of chest pain. I also 
+didn't feel as though I might faint. The main symptoms were the central chest 
+pain, discomfort in the upper stomach, a heavy feeling in my left arm, and 
+nausea. While the pain was intense during the first few minutes, it became a 
+constant and unpleasant sensation, and it completely eased off after about 20 
+minutes. Since then, I haven't had any lingering symptoms, and I currently feel 
+well
+Primary Care Physician:
+I've heard enough to know that your problem needs to be escalated. I would 
+like for you to go to your nearest emergency room should your pain recur.
+Patricia Wilson (45 yr) - 
+Chest Pain
+Probable diagnosis: Angina or 
+non-ST-elevation myocardial infarction
+Plausible alternative diagnoses: Biliary 
+disease, Dyspepsia
+PCP’s  Top 10 DDx:
+1.
+Acute Coronary Syndrome
+2.
+GERD
+3.
+Biliary Colic
+4.
+Pulmonary Embolism
+5.
+Pancreatitis
+6.
+N/A
+7.
+N/A
+8.
+N/A
+9.
+N/A
+10.
+N/A
+Online Text-based Consultation with PCP
+Patient Actor:
+Hi Doctor. how are you?
+Primary Care Physician:
+I'm great. How can I help you?
+Patient Actor:
+I recently experienced an episode of chest pain and discomfort. About two 
+hours ago, while walking home after lunch with my daughter, I developed 
+central chest pain along with some discomfort in the upper stomach.
+Primary Care Physician:
+I'm sorry to hear that. Are you still in pain?
+Patient Actor:
+No, I'm not currently in pain. The chest pain and discomfort I experienced 
+about two hours ago lasted for around 20 minutes, and since then, I 
+haven't felt any pain.
+Primary Care Physician:
+I'm glad you are not uncomfortable anymore. Chest pain can sometimes 
+be quite serious, though. Do you mind if I ask you so more questions? For 
+example, have you ever had similar pain before?
+Patient Actor:
+No, this is the first time when i'm having this kind of pain
+Primary Care Physician:
+Is it associated with any other symptoms? Like nausea/vomiting? Or 
+shortness of breath?
+Patient Actor:
+Yes, during the episode of chest pain, I did experience nausea. 
+Additionally, there was a heavy feeling in my left arm. I didn't feel sweaty or 
+breathless with the pain,
+Primary Care Physician:
+How old are you, may I ask? And what kind of medical conditions do you 
+have?
+Patient Actor:
+I'm 45 years old. I'm not on any prescribed medications, but I do take a 
+vitamin preparation that I buy from the chemist.
+Figure A.6 | PCP example consultation. Example of a patient actor’s conversation with a PCP during the OSCE study.
+|34
+A.5 DDx Top-k Accuracy by Degree of Matching
+In our OSCE study, the specialist was asked the following question:
+Question: How close did the doctor’s differential diagnosis (DDx) come to including the PROBABLE
+DIAGNOSIS from the answer key?
+• (Unrelated) Nothing in the DDx is related to the probable diagnosis.
+• (Somewhat Related) DDx contains something that is related, but unlikely to be helpful in
+determining the probable diagnosis.
+• (Relevant) DDx contains something that is closely related and might have been helpful in
+determining the probable diagnosis.
+• (Extremely Relevant) DDx contains something that is very close, but not an exact match to
+the probable diagnosis.
+• (Exact Match) DDx includes the probable diagnosis.
+Here we present an ablation analysis for varying degrees of matching to the ground truth where for each
+differential, we only considered a diagnosis a match if the specialist indicated in the answer to this question
+that the match was at least as close as the specified degree of matching. Note that all other specialist-rated
+DDx evaluations in this paper used the “Relevant” threshold when computing accuracy. The differences
+between AMIE and PCPs in DDx accuracy were statistically significant for all values of k at the matching
+levels “Relevant”, “Extremely Relevant”, and “Exact Match”.
+a
+b
+Figure A.7 | Specialist rated DDx accuracy by the degree of matching. (a) Specialist rated DDx top-10 accuracy for
+consultations conducted by AMIE. (b) Specialist rated DDx top-10 accuracy for consultations conducted by a PCP. For the
+“Relevant”, “Extremely Relevant”, and “Exact Match” levels, differences between AMIE and PCP DDx accuracy are statistically
+significant (bootstrap with n=10,000 and FDR correction) for all k. Differences at the “Somewhat Related” level are not
+statistically significant.
+|35
+A.6 DDx Top-k Accuracy by Specialty
+Figure A.8 shows the DDx accuracy achieved by AMIE and PCPs for each specialty based on specialist
+ratings. Specifically, we observed that AMIE’s performance matched or surpassed PCPs performance for all
+specialties.
+Cardiovascular
+Gastroenterology
+Internal Medicine
+Neurology
+Respiratory
+OBGYN / Urology
+0.2
+0.4
+0.6
+0.8
+1.0
+Top 1 Matches Ground Truth
+AMIE
+PC

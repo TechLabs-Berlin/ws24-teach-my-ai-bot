@@ -1,0 +1,116 @@
+ the given example (just list N/A if a particular field is unavailable).
+Condition: [Condition]
+Demographic Passages: [Retrieved Demographic Passages]
+Symptoms Passages: [Retrieved Symptom Passages]
+Management Plan Passages: [Retrieved Management Plan Passages]
+Example Format: [Oneshot example]
+Patient Vignettes for [Condition]:
+Simulated Dialogue Generator. Given a patient vignette detailing a specific medical condition, the
+simulated dialogue generator was designed to simulate a realistic dialogue between a patient and a doctor in
+an online chat setting where in-person physical examination may not be feasible.
+Three specific LLM agents (patient agent, doctor agent, and moderator), each played by AMIE, were tasked
+with communicating amongst each other to generate the simulated dialogues. Each agent had distinct
+instructions. The patient agent embodied the individual experiencing the medical condition outlined in the
+vignette. Their role involved truthfully responding to the doctor agent’s inquiries as well as raising any
+additional questions or concerns they may have had. The doctor agent played the role of an empathetic
+clinician seeking to comprehend the patient’s medical history within the online chat environment [24]. Their
+objective was to formulate questions that could effectively reveal the patient’s symptoms and background,
+leading to an accurate diagnosis and an effective treatment plan. The moderator continually assessed the
+ongoing dialogue between the patient agent and doctor agent, determining when the conversation had reached
+a natural conclusion.
+The turn-by-turn dialogue simulation started with the doctor agent initiating the conversation: “Doctor: So,
+how can I help you today?”. Following this, the patient agent responded, and their answer was incorporated
+into the ongoing dialogue history. Subsequently, the doctor agent formulated a response based on the updated
+dialogue history. This response was then appended to the conversation history. The conversation progressed
+until the moderator detected the dialogue had reached a natural conclusion, when the doctor agent had
+provided a differential diagnosis, treatment plan, and adequately addressed any remaining patient agent
+questions, or if either agent initiated a farewell.
+|7
+Patient Agent Instruction:
+You are a patient chatting with a doctor over an online chat interface. The doctor has never met you
+before. <patient vignette> Respond to the doctor’s questions honestly as they interview you, asking
+any questions that may come up.
+Doctor Agent Instruction:
+You are an empathetic clinician asking a patient about their medical history over an online chat
+interface. You know nothing about the patient in advance. Respond to the patient with a single-turn
+response to better understand their history and symptoms. Do not ask more than two questions. If
+the patient asks a question, be sure to answer it appropriately.
+Moderator Instruction:
+The following is a conversation between a doctor and a patient: <dialog> The conversation should
+only come to an end if the doctor has finished giving the patient a diagnosis and treatment plan and
+the patient has no questions left. A conversation also comes to an end if the doctor or patient says
+goodbye. Question: has the conversation come to an end? Yes or No.
+Self-play Critic. To ensure high-quality dialogues, we implemented a tailored self-play [25] framework
+specifically for self-improvement of diagnostic conversations. This framework introduced a fourth LLM agent,
+acting as a “critic” which was also played by AMIE and aware of the ground truth diagnosis, to provide
+in-context feedback to the doctor agent and enhance its performance in subsequent conversations. The critic
+agent evaluated the doctor agent’s responses based on the following criteria:
+• The doctor agent exhibits empathy and professionalism while addressing the patient agent’s latest
+questions or comments in a concise manner.
+• The doctor agent avoids asking too many or repetitive questions (about information already acquired),
+focusing on a maximum of one or two per response.
+• The responses should not reveal that the doctor agent is an AI chatbot. They should flow naturally,
+maintain factual accuracy, and facilitate further engagement from the patient.
+• The doctor agent asks sufficient questions to identify at least two of the most likely differential diagnoses.
+They further refine their understanding through targeted questions towards the ground truth diagnosis
+and offer the corresponding treatment.
+Following the critic’s feedback, the doctor agent incorporated the suggestions to improve its responses in
+subsequent rounds of dialogue with the same patient agent from scratch. Notably, the doctor agent retained
+access to its previous dialogue history at each new round. This self-improvement process was repeated twice
+to generate the dialogues used for each iteration of fine-tuning.
+2.3 Instruction Fine-tuning
+AMIE, built upon the base LLM PaLM 2 [10], was instruction fine-tuned to enhance its capabilities for
+medical dialogue and reasoning. We refer to the PaLM-2 technical report for more details on the base LLM
+architecture.
+We employed task-specific instructions to fine-tune AMIE in playing either the patient or doctor role within
+medical dialogues, performing medical question answering and reasoning, and summarizing EHR notes. While
+the first round of fine-tuning from the base LLM only used the static datasets, subsequent rounds of fine-tuning
+leveraged the simulated dialogues generated through the self-play inner loop as described in Section 2.2.1.
+For dialogue generation tasks, AMIE was trained to predict the next conversational turn based on all previous
+interactions, assuming either the doctor or patient role. When playing the patient agent, AMIE was prompted
+to reply to the doctor agent’s questions about their symptoms, drawing upon information provided in patient
+scenarios. These scenarios included patient vignettes (see Section 2.2.1) for simulated dialogues or metadata
+such as demographics, visit reason, and diagnosis type for the real-world dialogue dataset. In the doctor agent
+role, AMIE was prompted to act as an empathetic clinician, interviewing patients about their medical history
+|8
+and symptoms to ultimately arrive at an accurate diagnosis. From each dialogue, we sampled on average 3
+turns for each the doctor and patient roles as the target turns to predict based on the conversation leading up
+to that target turn. Target turns were randomly sampled from all turns in the dialogue that had a minimum
+length of 30 characters.
+Similarly, for the EHR note summarization task, AMIE was provided with a clinical note and prompted to
+generate a summary of the note. Medical reasoning/QA and long-form response generation tasks followed
+the same setup as in [13]. Notably, all tasks except dialogue generation and long-form response generation
+incorporated few-shot (1-5) exemplars in addition to task-specific instructions for additional context.
+2.4 Chain-of-reasoning for Online Inference
+To address the core challenge in diagnostic dialogue - effectively acquiring information under uncertainty
+to enhance diagnostic accuracy and confidence while maintaining positive rapport with the patient - AMIE
+employed a chain-of-reasoning strategy before generating a response in each dialogue turn. Here, “chain-of-
+reasoning” refers to a series of sequential model calls, each dependent on the outputs of prior steps. Specifically,
+we used a three-step reasoning process, described as follows:
+1. Analyzing patient information: Given the current conversation history, AMIE was instructed to 1)
+summarize the positive and negative symptoms of the patient as well as any relevant medical/family/social
+history and demographic information, 2) produce a current differential diagnosis, 3) note missing
+information needed for a more accurate diagnosis and 4) assess confidence in the current differential and
+highlight its urgency.
+2. Formulating response and action: Building upon the conversation history and the output of step
+1, AMIE performed the following: 1) Generate a response to the patient’s last message and formulate
+further questions to acquire missing information and refine the differential diagnosis. 2) If necessary,
+recommend immediate action, such as an emergency room visit. If confident in the diagnosis based on
+available information, present the differential.
+3. Refining the response: AMIE revises its previous output to meet specific criteria based on the
+conversation history and outputs from earlier steps. The criteria are primarily related to factuality and
+formatting of the response (e.g., avoid factual inaccuracies on patient facts and unnecessary repetition,
+show empathy, and display in a clear format).
+This chain-of-reasoning strategy enabled AMIE to progressively refine its response conditioned on the current
+conversation to arrive at an informed and grounded reply.
+3 Evaluation
+Prior works developing models for clinical dialogue have focused on metrics such as the accuracy of note-to-
+dialogue or dialogue-to-note generations [26, 27], or natural language generation metrics such as BLEU or
+ROUGE scores that fail to capture the clinical quality of a consultation [28, 29].
+In contrast to these prior works we sought to anchor our human evaluation in criteria more commonly used
+for evaluating the quality of physicians’ expertise in history-taking, including their communication skills
+in consultation. We derived a framework from principles published in reviews of the consensus for best
+practices for patient-centered communication (PCCBP) in medical interviews [20], criteria examined for
+history-taking skills by the Royal College of Physicians in the UK as part of their Practical Assessment of
+Clinical Examination Skills (PACES)3 [30], and criteria proposed by the UK General Medical Council Patient
+Questionnaire (GMCPQ)4 for doctors seeking patient feedback

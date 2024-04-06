@@ -1,0 +1,238 @@
+axes in the Diagnosis &
+Management rubric, namely, “Escalation Recommendation Appropriate”, “Treatment Inappropriate Avoided”,
+“Followup Recommendation Appropriate” and “Confabulation Absent”, despite no exclusions (N=149).
+4.2.2 Auto-evaluations demonstrated the effectiveness of inner self-play for AMIE.
+Auto-evaluation of Conversation Ratings. We leveraged the model-based self-CoT auto-evaluation
+strategy to rate conversations on four evaluation axes from the PACES rubric, and validated that these
+auto-evaluation ratings were accurate and well aligned with the specialist ratings (Figures A.17 and A.18).
+Furthermore, to demonstrate that the inner self-play loop improved simulated dialogue quality, we applied
+the auto-evaluation method to the simulated dialogues generated before and after the self-play procedure.
+Results in Figure A.19 revealed that the simulated dialogues after self-play were preferred more often than
+the baseline dialogues without self-critique.
+5 Related Work
+5.1 Clinical History-taking and the Diagnostic Dialogue
+History-taking and the clinical interview are widely taught in both medical schools’ and postgraduate
+curricula [37–42]. Consensus on physician-patient communication has evolved to embrace patient-centred
+communication practices, with recommendations that communication in clinical encounters should address six
+core functions: fostering the relationship, gathering information, providing information, making decisions,
+responding to emotions and enabling disease- and treatment-related behavior [20, 43, 44]. Specific skills and
+behaviours for meeting these goals have also been described, taught and assessed [20, 45] with validated
+tools [45]. Medical conventions consistently cite that certain categories of information should be gathered
+during a clinical interview, comprising topics such as the presenting complaint, past medical history and
+medication history, social and family history, and systems review [46, 47]. Clinicians’ ability to meet these goals
+is commonly assessed using the framework of an objective structured clinical examination (OSCE) [31–33].
+Such assessments vary in their reproducibility or implementation and have even been adapted for remote
+practice as virtual OSCEs (vOSCEs) with telemedical scenarios, an issue of particular relevance during the
+COVID-19 pandemic [48].
+5.2 Conversational AI and Goal-oriented Dialogue
+Conversational AI systems for goal-oriented dialogue and task completion have a rich history [49–51]. The
+emergence of transformers [52] and large language models [15] have led to renewed interest in this direction. The
+development of strategies for alignment [53], self-improvement [54–57] and scalable oversight mechanisms [58]
+have enabled large scale deployment of such conversational systems in the real world [16, 59]. However, the
+rigorous evaluation and exploration of conversational and task-completion capabilities of such AI systems
+remains limited for clinical applications, where studies have largely focused on single-turn interaction use
+cases such as question-answering or summarization.
+|15
+0
+20
+40
+60
+80
+100
+% Consultations
+Responding T
+o Emotions
+Enabling Disease And
+Treatment Related Behavior
+Decision Making
+Providing Information
+Gathering Information
+Relationship Fostering
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+PCCBP
+0
+20
+40
+60
+80
+100
+% Consultations
+Confabulation
+Absent (Y/N)
+Followup Recommendation
+Appropriate (Y/N)
+Treatment Inappropriate
+Avoided (Y/N)
+Treatment Appropriate
+Recommended (Y/N)
+Investigation Inappropriate
+Avoided (Y/N)
+Investigation Appropriate
+Recommended (Y/N)
+Escalation Recommendation
+Appropriate (Y/N)
+Management Plan
+Appropriateness
+DDx Comprehensiveness
+(4-point scale)
+DDx Appropriateness
+n.s.
+N=149
+n.s.
+N=149
+n.s.
+N=149
+***
+N=149
+**
+N=149
+***
+N=149
+n.s.
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+Diagnosis & Management
+AMIE (top)
+PCP (bottom)
+ 
+Very favorable
+Favorable (or "Yes" for Y/N)
+Neither favorable nor unfavorable
+Unfavorable (or "No" for Y/N)
+Very unfavorable
+Cannot rate / Does not apply /
+Agent did not perform this
+0
+20
+40
+60
+80
+100
+% Consultations
+Maintaining
+Patient Welfare
+Showing Empathy
+Understanding
+Patient Concerns
+Addressing
+Patient Concerns
+Clinical Judgement
+Differential Diagnosis
+Professionally
+Comprehensively
+With Structure
+Clearly
+Accurately
+Medication History
+Family History
+Past Medical History
+Systems Review
+Presenting Complaint
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=149
+***
+N=147
+***
+N=147
+***
+N=147
+***
+N=145
+***
+N=146
+***
+N=104
+***
+N=81
+***
+N=125
+***
+N=136
+***
+N=149
+Eliciting
+Explaining Relevant
+Clinical Information
+Managing
+Patient Concerns
+PACES
+Figure 5 | Specialist physician ratings. Conversation and reasoning qualities as assessed by specialist physicians. For
+illustration purposes, all responses from five-point rating scales were mapped to a generic five-point scale ranging from ‘Very
+favorable’ to ‘Very unfavorable’. The only four-point scale (DDx Comprehensiveness) was mapped to the same scale, ignoring the
+‘Neither favorable nor unfavorable’ option. For Yes/No questions, a (positive) ‘Yes’ response was mapped to the same color as
+‘Favorable’ and a (negative) ’No’ response to the same color as ‘Unfavorable’. Rating scales were adapted from the Practical
+Assessment of Clinical Examination Skills (PACES), a narrative review about Patient-Centered Communication Best Practice
+(PCCBP), and other sources. Details on question wording and response options are provided in Section A.1. Asterisks represent
+statistical significance (∗: p < 0.05, ∗∗: p < 0.01, ∗∗∗: p < 0.001, n.s. : not significant).
+|16
+5.3 AI for Medical Consultations and Diagnostic Dialogue
+The majority of explorations of AI as tools for conducting medical consultations have focused on “symptom
+checker” applications rather than a full natural dialogue, or on topics such as transcription of medical audio
+or the generation of plausible dialogue given clinical notes or summaries [60–63]. Language models have been
+trained using clinical dialogue datasets but not comprehensively evaluated [64]. Studies have been grounded in
+messages between doctors and patients in commercial chat platforms (which may have altered doctor-patient
+engagement compared to 1:1 medical consultations) [28, 65, 66]. Many focused largely on predicting next
+turns in the recorded exchanges rather than clinically meaningful metrics. And to date, there have been no
+reported studies that have examined the quality of AI models for diagnostic dialogue using the same criteria
+that are used to examine and train human physicians in dialogue and communication skills; nor evaluating AI
+systems in common frameworks such as the OSCE.
+5.4 Evaluation of Diagnostic Dialogue
+Prior frameworks for human evaluation of AI systems’ performance in diagnostic dialogue have been limited in
+detail. They have not been anchored in established criteria for assessing communication skills and the quality of
+history-taking. For example, [29] reported a 5-point scale describing overall “human evaluation”, [65] reported
+“relevance, informativeness and human likeness”, [66] reported “fluency, expertise and relevance”, [67] “fluency
+and adequacy” and [68] “fluency”. These criteria are far less comprehensive and specific than those taught
+and practiced by medical professionals. A multi-agent framework for assessing conversational capabilities of
+LLMs is introduced in [64], however, the study was performed in the restricted setting of dermatology, used
+AI models to emulate both doctor and patient sides of simulated interactions, and performed limited expert
+evaluation of history-taking as “complete” or not.
+6 Discussion
+In this study, we introduced AMIE, an LLM based AI system optimised for clinical dialogue with diagnostic
+reasoning capabilities. We compared AMIE consultations to those performed by PCPs using a randomized,
+double-blind crossover study with human simulated patients in the style of an Objective Structured Clinical
+Examination (OSCE). Notably, our study was not designed to be representative of clinical conventions either
+for traditional OSCE evaluations, for remote- or tele-medical consultation practices, or for the ways clinicians
+usually use text and chat messaging to communicate with patients. Our evaluation instead mirrored the
+most common way by which people interact with LLMs today, leveraging a potentially scalable and familiar
+mechanism for AI systems to engage in remote diagnostic dialogue. In this setting, we observed that AMIE,
+an AI system optimised specifically for the task, outperformed PCPs on simulated diagnostic conversations
+when evaluated along multiple clinically-meaningful axes of consultation quality.
+Diagnostic Performance. The differential diagnoses provided by AMIE were more accurate and complete
+than those provided by board-certified PCPs, when both were evaluated by specialist physicians. Previous
+research has shown that AI systems may match or exceed human diagnostic performance in specific, narrow
+tasks [69–71] in retrospective evaluation. However, these situations typically involved both AI and physicians
+interpreting the same fixed input (for example, identifying the presence of a specific finding in a medical image).
+Our study was significantly more challenging because it required the AI system to actively acquire relevant
+information through conversation rather than relying on clinical information collated by human efforts [72].
+Therefore the system’s downstream differential diagnoses depended on not only its diagnostic inference
+capability, but also the quality of information gathered under uncertainty through natural conversation and
+building rapport.
+Our results suggested that AMIE was as adept as PCPs in eliciting pertinent information during the simulated
+consultations and was more accurate than PCPs in formulating a complete differential diagnosis if given
+the same amount of acquired information. This finding corrobo

@@ -19,7 +19,7 @@ networkx==3.2.1
 nltk==3.8.1
 numpy==1.26.4
 packaging==24.0
-PyMuPDFb==1.24.0
+PyMuPDF==1.24.0
 PyPDF2==3.0.1
 PyYAML==6.0.1
 redis==5.0.3
