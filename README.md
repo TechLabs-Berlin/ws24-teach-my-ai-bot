@@ -23,8 +23,15 @@ pip install -r requirements.txt
 # How it works:
 
 **1. Upload PDF**
-**2. Ask Questions:** the model works best with factoid questions (short answers) not conceptual questions like: explain to me X
-**3. After 3 question you can start quiz:** but you can also continue as long as you want
+
+**2. Ask Questions:**
+the model works best with factoid questions (short answers) not conceptual questions like: explain to me X
+
+**3. After 3 question you can start quiz:**
+but you can also continue as long as you want
+
 **4. Quiz & Submit your answers!**
 
-Share your feedback if you find good / bad examples!
+Share your feedback if you find good / bad examples! 
+
+**Note:** if you run multiple times and notice weird things, open in incognito window and clean your browser cookies and cache if necessary
