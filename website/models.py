@@ -18,6 +18,8 @@ from haystack.pipelines import ExtractiveQAPipeline
 from haystack.utils import print_answers
 
 
+######   SONIA   ######
+
 tokenizer = T5Tokenizer.from_pretrained("t5-base")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -107,6 +109,8 @@ def gen_q(text):
     generated_question = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return generated_question
 
+
+######   OULA   ######
 
 ######   Answer Evaluation   #####
 
@@ -203,6 +207,8 @@ def generate_user_feedback(evaluation_result, context):
     return final_feedback
 
 
+######   Fernanda   ######
+
 
 ######   PDF HANDLING   ######
 
@@ -280,11 +286,15 @@ def split_file(filename, max_chars=9999):
   print(f"The long text file has been split into parts with a maximum of {max_chars} characters each. File paths stored in file_paths list.")
   return file_paths
 
+
+
+######   ARPAD   ######
+
 indexing_pipeline = TextIndexingPipeline(document_store)
 retriever = BM25Retriever(document_store=document_store)
 #My model, hosted on Hugging Face (just use the username / and the model name)
 #piece of code to check if an gpu is available
-reader = FARMReader(model_name_or_path="dusarpi/roberta-squad", use_gpu=False) #gpu?
+reader = FARMReader(model_name_or_path="dusarpi/roberta-squad", use_gpu=False, context_window_size=580) #gpu? maybe to write it to an exception block
 pipe = ExtractiveQAPipeline(reader, retriever)
 
 #asking a question
@@ -303,3 +313,22 @@ def run_query(questions):
     else:  # If no Haystack pipeline, provide guidance for alternative processing
       print(f"Please provide a Haystack pipeline or implement your own question processing logic for question: {question}")
   return output_dict
+
+
+# function to cut the text, after 450 characters, when reaching . , ! ?
+def clean_context(text):
+    if len(text) <= 450:
+        return text
+    else:
+        for i in range(450, len(text)):
+            if text[i] in ('.', '!', '?'):
+                return text[:i + 1]
+        return text[:450]
+
+
+def apply_clean_context_to_dict(input_dict):
+    output_dict = {}
+    for key, value in input_dict.items():
+        output_dict[key] = clean_context(value)
+    return output_dict
+

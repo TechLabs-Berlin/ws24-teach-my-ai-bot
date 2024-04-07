@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, session
 from .models import chunker, gen_a, highlight_answer, gen_q, tokenizer, evaluate_answer, generate_user_feedback
 from werkzeug.utils import secure_filename
-from .models import extract_text, extract_metadata, write_text_to_file, split_file, run_query, indexing_pipeline
+from .models import extract_text, extract_metadata, write_text_to_file, split_file, run_query, indexing_pipeline, apply_clean_context_to_dict
 import os
 
 views = Blueprint("views", __name__)
@@ -52,6 +52,7 @@ def ask_question():
 
     # Run the query
     output_dict = run_query([question])
+    output_dict = apply_clean_context_to_dict(output_dict)
 
     # Extract the first answer and its context
     if output_dict:
@@ -103,9 +104,9 @@ def generate_quiz():
 
     # Get current context and generate question and answer
     current_context = contexts[quiz_index]
-    chunked_text = chunker(current_context, tokenizer)
-    question = gen_q(chunked_text[0])[0] if isinstance(gen_q(chunked_text[0]), list) else gen_q(chunked_text[0])
-    answer = gen_a(chunked_text[0])[0] if isinstance(gen_a(chunked_text[0]), list) else gen_a(chunked_text[0])
+    tokenized_context = tokenizer.encode(current_context, add_special_tokens=False)
+    question = gen_q(tokenized_context)[0] if isinstance(gen_q(tokenized_context), list) else gen_q(tokenized_context)
+    answer = gen_a(tokenized_context)[0] if isinstance(gen_a(tokenized_context), list) else gen_a(tokenized_context)
 
     # Process user's answer submission
     if request.method == 'POST':
@@ -130,7 +131,8 @@ def generate_quiz():
                            question=next_question, quiz_index=quiz_index)
 
 
-#
+
+## this code was the easier set up but it currently returns error. Kept if for reference regarding question answer handling
 # @views.route('/generate_quiz', methods=['GET', 'POST'])
 # def generate_quiz():
 #     # Ensure 'quiz_index' and 'feedback' are initialized in session
@@ -181,52 +183,8 @@ def generate_quiz():
 #         return render_template('quiz.html', quiz_completed=True,
 #                                completion_message="Quiz completed! No more questions available.",
 #                                feedback=session['feedback'])
-
-
-
-
-
-
-# @views.route('/generate_quiz', methods=['GET', 'POST'])
-# def generate_quiz():
-#     print("generate_quiz accessed")
-#     if 'quiz_index' not in session:
-#         session['quiz_index'] = 0
-#     if 'feedback' not in session:
-#         session['feedback'] = []
 #
-#     quiz_index = session['quiz_index']
-#     feedback = session['feedback']
-#
-#     # Assuming captured_texts are stored in session
-#     if quiz_index < len(session['captured_texts']):
-#         current_context = session['captured_texts'][quiz_index]
-#         chunked_text = chunker(current_context, tokenizer)
-#         questions, answers, feedback = [], [], []
-#
-#         for chunk in chunked_text:
-#             # Generate question-answer pairs
-#             answer_text = gen_a(chunk)[0] if isinstance(gen_a(chunk), list) else gen_a(chunk)
-#             question_text = gen_q(chunk)[0] if isinstance(gen_q(chunk), list) else gen_q(chunk)
-#             questions.append(question_text)
-#             answers.append(answer_text)
-#         user_answer = request.form['user_answer']
-#         for idx, (question, answer) in enumerate(zip(questions, answers)):
-#             user_answer = request.form.get(f'user_answer_{idx}', '').strip()
-#             if user_answer:
-#                 # Evaluate the user's answer
-#                 evaluation_result = evaluate_answer(chunk, question, answer, user_answer)
-#                 # Generate feedback based on the evaluation
-#                 feedback.append(generate_user_feedback(evaluation_result, chunk))
-#         session['quiz_index'] += 1  # Prepare for next question
-#         session['feedback'] = feedback
-#
-#         if session['quiz_index'] >= len(session['captured_texts']):
-#             # Quiz completed
-#             return render_template('quiz.html', quiz_completed=True, completion_message="Quiz completed! Review your feedback below.", feedback=feedback)
-#         else:
-#             # Next question
-#             return render_template('quiz.html', question=question, feedback=feedback[-1])
-#     else:
-#         # Quiz completed
-#         return render_template('quiz.html', quiz_completed=True, completion_message="Quiz completed! Review your feedback below.", feedback=feedback)
+
+
+
+
