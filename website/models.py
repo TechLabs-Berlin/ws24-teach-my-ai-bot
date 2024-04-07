@@ -114,27 +114,27 @@ def gen_q(text):
 
 ######   Answer Evaluation   #####
 
-# Initialize the models
+# initialize models
 semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 answer_assessment_model = pipeline("text-classification", model="Giyaseddin/distilroberta-base-finetuned-short-answer-assessment", return_all_scores=True)
 
-def evaluate_answer(context, question, ref_answer, student_answer):
-    # Initialize evaluation and feedback
+def evaluate_answer(context, question, ref_answer, user_answer):
+    # initialize evaluation result dict
     evaluation_result = {"evaluation": None, "feedback": None}
 
-    # Direct Comparison
-    if student_answer.lower().strip() == ref_answer.lower().strip():
+    # STEP 1: direct Comparison
+    if user_answer.lower().strip() == ref_answer.lower().strip():
         evaluation_result["evaluation"] = "correct"
         evaluation_result["feedback"] = "Your answer is exactly correct."
         return evaluation_result
-    # Compute embeddings for the reference and student answers
+    # compute embeddings for the reference and user answers
     ref_embedding = semantic_model.encode(ref_answer)
-    student_embedding = semantic_model.encode(student_answer)
+    student_embedding = semantic_model.encode(user_answer)
 
-    # Calculate cosine similarity between embeddings
+    # calculate cosine similarity
     similarity = util.pytorch_cos_sim(ref_embedding, student_embedding)[0][0].item()
 
-    # Apply thresholds for semantic similarity
+    # STEP 2: semantic similarity thresholds (set based on testing different values)
     if similarity > 0.8:
         evaluation_result["evaluation"] = "correct"
         evaluation_result["feedback"] = "Your understanding of the concept is on point."
@@ -144,8 +144,8 @@ def evaluate_answer(context, question, ref_answer, student_answer):
         evaluation_result["feedback"] = "There seems to be a misunderstanding of the concept."
         return evaluation_result
 
-    # DistilRoBERTa Evaluation for nuanced assessment
-    body = " [SEP] ".join([context, question, ref_answer, student_answer])
+    # STEP 3: DistilRoBERTa Evaluation for nuanced assessment
+    body = " [SEP] ".join([context, question, ref_answer, user_answer])
     raw_results = answer_assessment_model([body])
     best_result = max(raw_results[0], key=lambda x: x['score'])
     distilroberta_label = int(best_result['label'][-1])
@@ -167,41 +167,41 @@ def evaluate_answer(context, question, ref_answer, student_answer):
 
 ######   Generate User Feedback   #####
 
-# Initialize the summarization pipeline
+# initialize summarization pipeline
 summarizer_pipeline = pipeline("summarization", model="Oulaa/teachMy_sum")
 def generate_user_feedback(evaluation_result, context):
     """
-    Generates tailored user feedback by summarizing the context or feedback and context
-    based on the evaluation of the user's answer.
+    Generates tailored user feedback by summarizing evaluation result and context
 
     Parameters:
-    - evaluation_result (dict): The result from the evaluate_answer function, containing 'evaluation' and 'feedback'.
+    - evaluation_result (dict): from the evaluate_answer(), containing 'evaluation' and 'feedback'.
     - context (str): The context related to the question and answer.
 
     Returns:
-    - str: Tailored user feedback based on the summarization of the context or feedback with context.
+    - str: Tailored user feedback based on the summarization of the feedback with context.
     """
     sum_tokenizer = AutoTokenizer.from_pretrained("Oulaa/teachMy_sum")
     separator = "\n\n"  # Double newline for clear separation
 
-    # Tokenize the context to count the tokens
+    # tokenize the context and count tokens
     context_tokens = sum_tokenizer.tokenize(context)
     num_context_tokens = len(context_tokens)
 
-    # Define a threshold for when the context is considered too long in terms of tokens
-    token_threshold = 512  # Adjust based on model's capacity and performance
+    # threshold for when context is too long in tokens
+    token_threshold = 512
 
-    # Determine the maximum length for summarization
-    max_length_output = num_context_tokens  # Use the context token count unless it exceeds the threshold
+    # maximum length for summarization [KEY STEP]
+    # Use the same context token count unless it exceeds the threshold, meaning we will not cut out anything from context unless too long
+    max_length_output = num_context_tokens
     if num_context_tokens > token_threshold:
-        max_length_output = int(num_context_tokens * 0.75)  # Summarize to 75% of the context token count
+        max_length_output = int(num_context_tokens * 0.75)  # if too long, summarize to 75% of the context token count
 
     # Summarize the context
     summarized_context = \
     summarizer_pipeline(context, max_length=max_length_output, min_length=int(max_length_output / 2), do_sample=False)[
         0]['summary_text']
 
-    # Prepend the feedback to the summarized content with clear separation
+    # append the feedback to the summarized context
     final_feedback = f"{evaluation_result['feedback']}{separator}{summarized_context}"
 
     return final_feedback

@@ -6,7 +6,7 @@ import os
 
 views = Blueprint("views", __name__)
 
-# Utility function moved here for accessibility
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'pdf'}
 
@@ -15,7 +15,7 @@ def allowed_file(filename):
 def upload_file():
 
     if request.method == 'GET':
-        # Reset session variables for a new session
+        # reset session variables for a new session
         session['allow_questions'] = False
         session['captured_texts'] = []
 
@@ -50,21 +50,21 @@ def ask_question():
         flash('Please enter a question.')
         return redirect(url_for('views.upload_file'))
 
-    # Run the query
+    # run query
     output_dict = run_query([question])
     output_dict = apply_clean_context_to_dict(output_dict)
 
-    # Extract the first answer and its context
+    # extract the first answer and its context
     if output_dict:
-        # Get the first key-value pair from the dictionary
+
         answer, context = next(iter(output_dict.items()))
-        # Store the context (relevant text) for quiz generation
+        # store context in session for quiz generation
         session['captured_texts'].append(context)
     else:
         answer, context = "Sorry, I couldn't find an answer.", ""
 
     session['questions_asked'] = session.get('questions_asked', 0) + 1
-    # Pass both answer and context to the template
+    # pass answer and context to template
     return render_template('home.html', answer=answer, context=context, allow_questions=True, show_start_quiz=session['questions_asked'] >= 3, in_quiz_phase=False)
 
 @views.route('/start_quiz', methods=['GET'])
@@ -72,118 +72,62 @@ def start_quiz():
     session['in_quiz_phase'] = True
     if 'captured_texts' in session and session['captured_texts']:
         session['allow_questions'] = False
-        # Initialize or reset the quiz index to start from the first question
+        # reset quiz index to start from the first question
         session['quiz_index'] = 0
-        # Redirect to the generate_quiz route to start the quiz
+        # redirect generate_quiz
         return redirect(url_for('views.generate_quiz'))
     else:
-        # If no contexts are captured, inform the user and redirect back
         flash("No context available for quiz generation. Please ask some questions first.")
         return redirect(url_for('views.upload_file'))
 
 
 @views.route('/generate_quiz', methods=['GET', 'POST'])
 def generate_quiz():
-    # Ensure 'quiz_index' and 'feedback' are initialized in session
+    # initialize session variables
     if 'quiz_index' not in session:
         session['quiz_index'] = 0
     if 'feedback' not in session:
         session['feedback'] = []
 
-    # Fetch current quiz index, contexts, and feedback from session
+    # fetch current quiz session values
     quiz_index = session['quiz_index']
     contexts = session.get('captured_texts', [])
     feedback = session.get('feedback', [])
 
-    # Check for quiz completion
+    # check for quiz completion
     if quiz_index >= len(contexts):
         session['in_quiz_phase'] = False  # Mark quiz as completed
         return render_template('quiz.html', quiz_completed=True,
                                completion_message="Quiz completed! Review your feedback below.",
                                feedback=feedback)
 
-    # Get current context and generate question and answer
+    # generate question and answer from current context
     current_context = contexts[quiz_index]
     tokenized_context = tokenizer.encode(current_context, add_special_tokens=False)
     question = gen_q(tokenized_context)[0] if isinstance(gen_q(tokenized_context), list) else gen_q(tokenized_context)
     answer = gen_a(tokenized_context)[0] if isinstance(gen_a(tokenized_context), list) else gen_a(tokenized_context)
 
-    # Process user's answer submission
+    # User answer submission
     if request.method == 'POST':
         user_answer = request.form.get('user_answer', '').strip()
         if user_answer:
             evaluation_result = evaluate_answer(current_context, question, answer, user_answer)
-            feedback.append(generate_user_feedback(evaluation_result, current_context))  # Append new feedback
-            session['feedback'] = feedback  # Update feedback in session
-            quiz_index += 1  # Increment quiz index to move to next question
-            session['quiz_index'] = quiz_index  # Update quiz index in session
+            feedback.append(generate_user_feedback(evaluation_result, current_context))  # append new feedback
+            session['feedback'] = feedback  # update feedback in session
+            quiz_index += 1  # move to next question
+            session['quiz_index'] = quiz_index
 
-    # Prepare next question if available
+    # prepare next question if available
     if quiz_index < len(contexts):
         next_context = contexts[quiz_index]
         next_chunked_text = chunker(next_context, tokenizer)
         next_question = gen_q(next_chunked_text[0])[0] if isinstance(gen_q(next_chunked_text[0]), list) else gen_q(next_chunked_text[0])
     else:
-        next_question = None  # No more questions available
+        next_question = None  # no more questions available
 
-    # Render template with current feedback and next question
+    # render template with current feedback and next question
     return render_template('quiz.html', feedback=feedback[-1] if feedback else None,
                            question=next_question, quiz_index=quiz_index)
-
-
-
-## this code was the easier set up but it currently returns error. Kept if for reference regarding question answer handling
-# @views.route('/generate_quiz', methods=['GET', 'POST'])
-# def generate_quiz():
-#     # Ensure 'quiz_index' and 'feedback' are initialized in session
-#     if 'quiz_index' not in session:
-#         session['quiz_index'] = 0
-#     if 'feedback' not in session:
-#         session['feedback'] = []
-#
-#     # Fetch current quiz index, contexts, and feedback from session
-#     quiz_index = session['quiz_index']
-#     contexts = session.get('captured_texts', [])
-#     feedback = session.get('feedback', [])
-#
-#     current_context = contexts[quiz_index]
-#     chunked_text = chunker(current_context, tokenizer)
-#
-#     if chunked_text:
-#         question = gen_q(chunked_text[0])[0] if isinstance(gen_q(chunked_text[0]), list) else gen_q(
-#             chunked_text[0])  # Use the first chunk for simplicity
-#         answer = gen_a(chunked_text[0])[0] if isinstance(gen_a(chunked_text[0]), list) else gen_a(
-#             chunked_text[0])  # Get the corresponding answer
-#
-#         if request.method == 'POST':
-#             user_answer = request.form.get('user_answer', '').strip()
-#             if user_answer:
-#                 evaluation_result = evaluate_answer(current_context, question, answer, user_answer)
-#                 feedback.append(generate_user_feedback(evaluation_result, current_context))
-#                 session['feedback'] = feedback  # Update the session variable
-#
-#             quiz_index += 1  # Increment quiz index to move to next question
-#             session['quiz_index'] = quiz_index
-#
-#             # Prepare next question if available
-#             if quiz_index < len(contexts):
-#                 next_context = contexts[quiz_index]
-#                 next_chunked_text = chunker(next_context, tokenizer)
-#                 next_question = gen_q(next_chunked_text[0])[0] if isinstance(gen_q(next_chunked_text[0]),
-#                                                                              list) else gen_q(next_chunked_text[0])
-#             else:
-#                 next_question = None  # No more questions available
-#
-#             # Render template with current feedback and next question
-#             return render_template('quiz.html', feedback=feedback[-1] if feedback else None,
-#                                    question=next_question, quiz_index=quiz_index)
-#     else:
-#         # No chunks to generate questions from, consider quiz completed
-#         session['in_quiz_phase'] = False
-#         return render_template('quiz.html', quiz_completed=True,
-#                                completion_message="Quiz completed! No more questions available.",
-#                                feedback=session['feedback'])
-#
 
 
 
