@@ -3,6 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload File</title>
+    <style>
+        /* Adding some basic styles for better presentation */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%; /* Makes the input field take the full width of its parent container */
+            padding: 10px; /* Adds some padding inside the input field for better readability */
+            margin-bottom: 10px; /* Adds some space below the input field */
+            box-sizing: border-box; /* Ensures padding does not affect the final computed width of the input */
+        }
+
+        input[type="submit"], input[type="file"] {
+            cursor: pointer; /* Changes cursor to pointer when hovering over the buttons */
+        }
+
+        form {
+            margin-bottom: 20px; /* Adds some space below each form */
+        }
+    </style>
 </head>
 <body>
     {% if not allow_questions %}

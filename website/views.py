@@ -103,9 +103,16 @@ def generate_quiz():
 
     # generate question and answer from current context
     current_context = contexts[quiz_index]
-    tokenized_context = tokenizer.encode(current_context, add_special_tokens=False)
-    question = gen_q(tokenized_context)[0] if isinstance(gen_q(tokenized_context), list) else gen_q(tokenized_context)
-    answer = gen_a(tokenized_context)[0] if isinstance(gen_a(tokenized_context), list) else gen_a(tokenized_context)
+    chunked_text = chunker(current_context, tokenizer)
+    answer = gen_a(chunked_text[0])[0] if isinstance(gen_a(chunked_text[0]), list) else gen_a(chunked_text[0])
+    highlighted_text = highlight_answer(chunked_text[0], answer, tokenizer)
+    question = gen_q(highlighted_text)[1] if isinstance(gen_q(highlighted_text), list) else gen_q(highlighted_text)
+
+    # No Chunking method
+    # tokenized_context = tokenizer.encode(current_context, add_special_tokens=False)
+    # answer = gen_a(tokenized_context)[0] if isinstance(gen_a(tokenized_context), list) else gen_a(tokenized_context)
+    # highlighted_text = highlight_answer(tokenized_context, answer, tokenizer)
+    # question = gen_q(highlighted_text)[0] if isinstance(gen_q(highlighted_text), list) else gen_q(highlighted_text)
 
     # User answer submission
     if request.method == 'POST':
@@ -121,7 +128,9 @@ def generate_quiz():
     if quiz_index < len(contexts):
         next_context = contexts[quiz_index]
         next_chunked_text = chunker(next_context, tokenizer)
-        next_question = gen_q(next_chunked_text[0])[0] if isinstance(gen_q(next_chunked_text[0]), list) else gen_q(next_chunked_text[0])
+        next_question_answer = gen_a(next_chunked_text[0])[0] if isinstance(gen_a(next_chunked_text[0]), list) else gen_a(next_chunked_text[0])
+        next_highlighted_text = highlight_answer(next_chunked_text[0], next_question_answer, tokenizer)
+        next_question = gen_q(next_highlighted_text)[0] if isinstance(gen_q(next_highlighted_text), list) else gen_q(next_highlighted_text)
     else:
         next_question = None  # no more questions available
 
