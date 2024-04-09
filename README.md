@@ -1,10 +1,8 @@
 # How to use:
 
-**1. Download the models here**
+**1. Download the models**
 
-https://github.com/TechLabs-Berlin/ws24-teach-my-ai-bot/releases/tag/v1
-
-https://github.com/TechLabs-Berlin/ws24-teach-my-ai-bot/releases/tag/answerv1
+Sent via Slack
 
 **2. Put both files into the empty models folder**
 
@@ -20,3 +18,20 @@ pip install -r requirements.txt
 
 **4. Go to main.py and run it**
 
+
+
+# How it works:
+
+**1. Upload PDF**
+
+**2. Ask Questions:**
+the model works best with factoid questions (short answers) not conceptual questions like: explain to me X
+
+**3. After 3 question you can start quiz:**
+but you can also continue as long as you want
+
+**4. Quiz & Submit your answers!**
+
+Share your feedback if you find good / bad examples! 
+
+**Note:** if you run multiple times and notice weird things, open in incognito window and clean your browser cookies and cache if necessary
