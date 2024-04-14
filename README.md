@@ -52,12 +52,13 @@ the model works best with factoid questions (short answers) not conceptual quest
 **3. After 3 question you can start quiz:**
 but you can also continue as long as you want
 
-&nbsp;
-
-# Authors:
-
 **4. Quiz & Submit your answers!**
 
 Share your feedback if you find good / bad examples! 
 
 **Note:** if you run multiple times and notice weird things, open in incognito window and clean your browser cookies and cache if necessary
+
+
+&nbsp;
+
+# Authors:
