@@ -23,9 +23,17 @@ TeachMy is an NLP application that transforms PDFs into interactive learning exp
 
 **1. Download the models**
 
-Sent via Slack
+The models can be found here:
 
-**2. Put both files into the empty models folder**
+```
+https://github.com/TechLabs-Berlin/ws24-teach-my-ai-bot/releases/tag/v1
+```
+
+```
+https://github.com/TechLabs-Berlin/ws24-teach-my-ai-bot/releases/tag/answerv1
+```
+
+**2. Place both .pth files into the empty models folder**
 
 **3. Run this code**
 
