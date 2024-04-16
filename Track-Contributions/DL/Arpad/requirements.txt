@@ -1,0 +1,4 @@
+farm-haystack[colab,inference]
+PyPDF2 
+nltk
+PyMuPDF
