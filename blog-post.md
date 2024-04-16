@@ -11,6 +11,16 @@
 
 
 # Data Science
+The recommendation feature utilizes public datasets from Coursera and Udemy, along with the YouTube API. To enhance accuracy, we focused exclusively on technology-related courses within these datasets. We then preprocessed and cleaned the data using tools such as Pandas, NumPy, Scikit-learn, NLTK, and regular expressions.
+
+The cleaning process involved several key steps: standardizing column names and contents, reordering them, dropping missing values, and removing courses with low ratings. To determine the cut-off for low ratings, we visualized the data using Matplotlib and Seaborn. Additionally, we conducted manual inspections to identify duplicate URLs, verify their functionality, and confirm the active status of the courses. After that, we merged the Coursera and Udemy datasets and integrated data from the YouTube API.
+
+Bibin, please add the YouTube API process.
+
+For the analysis, we used Term Frequency vectorization to calculate cosine similarity. The courses from Coursera and Udemy with the highest similarity scores, based on the "Summary" column, were identified as the most relevant. For YouTube videos, we opted to analyze the "Title" instead of the "Summary" description, as the descriptions were not standardized.
+As a result, we chose to display the top five relevant courses/videos. The displayed information includes "Course Title", "Offered By", "Summary", "Rating", "Number of Reviews", "Level", "Hours to Complete", and "Link to the Course".
+
+
 
 # Deep Learning
 First, we implemented a question-answering agent, which answers question(s) from the user, based on an uploaded pdf document. The uploaded pdf(s) serves as a knowledge base.
