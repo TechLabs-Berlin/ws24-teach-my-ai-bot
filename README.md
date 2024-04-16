@@ -70,3 +70,5 @@ Share your feedback if you find good / bad examples!
 &nbsp;
 
 # Authors:
+Deep Learning: Oula Suliman, Sonia, Arpad Dusa
+Data Science: Bibin Karthikeyan Krishna, Fernanda Portieri
